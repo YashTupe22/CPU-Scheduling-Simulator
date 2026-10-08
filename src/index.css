@@ -1,0 +1,349 @@
+@import 'tailwindcss';
+
+/* Class-based dark mode: <html class="dark"> is set by the inline script in
+   index.html before first paint and kept in sync by useTheme. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+  --color-canvas: #f6f7fb;
+  --color-surface: #ffffff;
+  --color-ink: #0f172a;
+  --color-muted: #64748b;
+  --color-line: #e2e8f0;
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    color-scheme: light;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  #root {
+    min-height: 100svh;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@utility input-base {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-line);
+  background-color: #fff;
+  padding: 0.5rem 0.625rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--color-ink);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  outline: none;
+
+  &::placeholder {
+    color: #94a3b8;
+  }
+
+  &:focus {
+    border-color: var(--color-brand-500);
+    box-shadow: 0 0 0 3px rgb(99 102 241 / 0.18);
+  }
+
+  &.input-invalid {
+    border-color: #f43f5e;
+    background-color: #fff1f2;
+  }
+
+  &.input-invalid:focus {
+    box-shadow: 0 0 0 3px rgb(244 63 94 / 0.18);
+  }
+}
+
+@utility gantt-idle {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #f1f5f9 0,
+    #f1f5f9 5px,
+    #e2e8f0 5px,
+    #e2e8f0 10px
+  );
+}
+
+/* Small entrance animation for freshly rendered results. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-rise {
+  animation: rise-in 0.22s ease-out both;
+}
+
+/* ==========================================================================
+   Dark theme layer
+   --------------------------------------------------------------------------
+   One place remaps the surface/colour utilities the UI uses so every
+   component stays theme-agnostic. Semantic tokens (canvas, surface, line,
+   ink, brand) are overridden as CSS variables; the concrete Tailwind
+   palette classes are remapped below. Both mechanisms only apply while
+   <html> carries the `dark` class.
+   ========================================================================== */
+
+.dark {
+  color-scheme: dark;
+
+  --color-canvas: #020617;
+  --color-surface: #0f172a;
+  --color-ink: #e2e8f0;
+  --color-muted: #93a1b5;
+  --color-line: #1e293b;
+  --color-brand-50: #312e81;
+  --color-brand-100: #3730a3;
+  --color-brand-200: #4338ca;
+  --color-brand-700: #c7d2fe;
+}
+
+/* Surfaces: cards and inputs stay one step above the page; wells sink below. */
+.dark .bg-white {
+  background-color: #0f172a;
+}
+.dark .bg-white\/85 {
+  background-color: rgb(15 23 42 / 0.85);
+}
+.dark .bg-slate-50,
+.dark .bg-slate-100 {
+  background-color: #0b1220;
+}
+.dark .bg-slate-50\/60 {
+  background-color: rgb(11 18 32 / 0.6);
+}
+.dark .bg-slate-50\/70 {
+  background-color: rgb(11 18 32 / 0.7);
+}
+.dark .bg-slate-200 {
+  background-color: #1e293b;
+}
+.dark .bg-slate-300 {
+  background-color: #475569;
+}
+.dark .bg-slate-900 {
+  background-color: #020617;
+}
+.dark .hover\:bg-slate-50:hover,
+.dark .hover\:bg-slate-100:hover {
+  background-color: #1e293b;
+}
+
+/* Text hierarchy: invert the slate ramp and keep every level distinguishable. */
+.dark .text-slate-900 {
+  color: #f8fafc;
+}
+.dark .text-slate-800 {
+  color: #e8edf4;
+}
+.dark .text-slate-700 {
+  color: #cbd5e1;
+}
+.dark .text-slate-600 {
+  color: #b6c2d2;
+}
+.dark .text-slate-500 {
+  color: #93a1b5;
+}
+.dark .text-slate-400 {
+  color: #6b7a91;
+}
+.dark .text-slate-300 {
+  color: #cbd5e1;
+}
+.dark .hover\:text-slate-900:hover {
+  color: #f8fafc;
+}
+
+/* Borders and rings. */
+.dark .border-slate-200,
+.dark .border-slate-300 {
+  border-color: #334155;
+}
+.dark .hover\:border-slate-300:hover {
+  border-color: #64748b;
+}
+.dark .border-rose-200 {
+  border-color: #881337;
+}
+.dark .border-emerald-200 {
+  border-color: #065f46;
+}
+.dark .border-amber-200 {
+  border-color: #854d0e;
+}
+.dark .border-indigo-200 {
+  border-color: #3730a3;
+}
+.dark .ring-slate-200 {
+  --tw-ring-color: #334155;
+}
+.dark .ring-rose-200 {
+  --tw-ring-color: #881337;
+}
+.dark .ring-emerald-200 {
+  --tw-ring-color: #065f46;
+}
+.dark .ring-amber-200 {
+  --tw-ring-color: #854d0e;
+}
+.dark .ring-indigo-200 {
+  --tw-ring-color: #3730a3;
+}
+.dark .ring-sky-200 {
+  --tw-ring-color: #0c4a6e;
+}
+
+/* Tinted backgrounds (alerts, badges, stat tiles) flip to their 900 shades. */
+.dark .bg-rose-50,
+.dark .hover\:bg-rose-50:hover {
+  background-color: #4c0519;
+}
+.dark .bg-emerald-50 {
+  background-color: #022c22;
+}
+.dark .bg-emerald-50\/60 {
+  background-color: rgb(2 44 34 / 0.6);
+}
+.dark .bg-amber-50 {
+  background-color: #451a03;
+}
+.dark .bg-indigo-50 {
+  background-color: #312e81;
+}
+.dark .bg-indigo-100 {
+  background-color: #3730a3;
+}
+.dark .bg-sky-50 {
+  background-color: #082f49;
+}
+.dark .bg-sky-50\/60 {
+  background-color: rgb(8 47 73 / 0.6);
+}
+.dark .bg-violet-50 {
+  background-color: #2e1065;
+}
+
+/* Text on those tints flips to the matching 200/300 shade for contrast. */
+.dark .text-rose-500,
+.dark .text-rose-600,
+.dark .hover\:text-rose-600:hover {
+  color: #fb7185;
+}
+.dark .text-rose-700 {
+  color: #fda4af;
+}
+.dark .text-rose-800 {
+  color: #fecdd3;
+}
+.dark .text-emerald-600 {
+  color: #6ee7b7;
+}
+.dark .text-emerald-700 {
+  color: #a7f3d0;
+}
+.dark .text-amber-700 {
+  color: #fcd34d;
+}
+.dark .text-amber-800 {
+  color: #fde68a;
+}
+.dark .text-indigo-600 {
+  color: #a5b4fc;
+}
+.dark .text-indigo-700 {
+  color: #c7d2fe;
+}
+.dark .text-indigo-800,
+.dark .text-indigo-900 {
+  color: #e0e7ff;
+}
+.dark .text-sky-600,
+.dark .text-sky-700 {
+  color: #7dd3fc;
+}
+.dark .text-violet-600 {
+  color: #c4b5fd;
+}
+.dark .text-brand-600 {
+  color: #a5b4fc;
+}
+/* brand-700 is a light text colour in dark mode, so the primary-button hover
+   needs its own (lighter) background to keep white text readable. */
+.dark .hover\:bg-brand-700:hover {
+  background-color: #6366f1;
+}
+
+/* Form controls. */
+.dark .input-base {
+  background-color: #0f172a;
+  border-color: #334155;
+  color: #e8edf4;
+}
+.dark .input-base::placeholder {
+  color: #6b7a91;
+}
+.dark .input-base:focus {
+  border-color: var(--color-brand-500);
+  box-shadow: 0 0 0 3px rgb(99 102 241 / 0.3);
+}
+.dark .input-base.input-invalid {
+  border-color: #fb7185;
+  background-color: #4c0519;
+}
+
+/* Gantt chart. */
+.dark .gantt-idle {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #1e293b 0,
+    #1e293b 5px,
+    #334155 5px,
+    #334155 10px
+  );
+}
+
+/* Respect the OS-level reduced-motion setting everywhere. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

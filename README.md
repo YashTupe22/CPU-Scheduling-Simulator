@@ -1,13 +1,45 @@
+<div align="center">
+
 # CPU Scheduling Simulator
 
-An interactive web simulator for the classic CPU scheduling algorithms taught in
-Operating Systems courses. Build a workload, pick an algorithm, and watch the
-scheduler dispatch processes in real time — with a Gantt chart, per-process
-metrics, a step-through playback mode, and a side-by-side comparison of every
-implemented algorithm.
+### An Interactive Web Simulator for CPU Scheduling Algorithms
 
-Built with **React 19 + TypeScript + Vite + Tailwind CSS v4**. Runtime
-dependencies: `react` and `react-dom` only.
+**Operating Systems — Final Year Academic Project**
+**Course: AIML(AN)**
+
+</div>
+
+---
+
+| | |
+| :-- | :-- |
+| **Subject** | Operating Systems |
+| **Program** | AIML(AN) — Final Year |
+| **Project guide** | Mrs. S Babar |
+| **Project type** | Team project — 6 members |
+| **Technology** | React 19 · TypeScript · Vite · Tailwind CSS v4 |
+| **Runtime dependencies** | `react`, `react-dom` |
+| **License** | Academic / coursework use |
+
+## Project Team
+
+| # | Name |
+| :-: | :-- |
+| 1 | Yash Tupe |
+| 2 | Saheel Khadke |
+| 3 | Atharv Bhosale |
+| 4 | Bhagyashree Phalphale |
+| 5 | Srushti Mane |
+| 6 | Sanskar Arude |
+
+## Acknowledgement
+
+This project has been developed for the **Operating Systems** subject as part
+of the final-year course of **AIML(AN)**, by a team of six members. The
+concepts, algorithms and working demonstrated in this simulator are based on
+the theory and practicals taught by our faculty. We sincerely thank our
+project guide, **Mrs. S Babar**, and the faculty for their guidance and support
+throughout the course of this project.
 
 ## Objective
 
@@ -31,6 +63,7 @@ framework-agnostic scheduling engine and renders:
 | 5 | Step-through playback: play/pause, step, reset, speed 0.25×–4× | `src/components/simulator` |
 | 6 | Comparison panel: 5 metric charts + win tally + starred best values | `src/components/comparison` |
 | 7 | Tests, strict validation, error/loading states, dark mode, a11y, README | throughout |
+| 8 | About page: project details, working steps, team, project guide | `src/components/about` |
 
 Quality of life: dark/light theme (system-aware, persisted, no flash), reduced
 motion support, keyboard-accessible timeline, screen-reader announcements for
@@ -87,6 +120,23 @@ npm test          # run the test suite (Vitest)
 npm run lint      # oxlint
 ```
 
+Requirements: **Node.js 22.x** (see `.nvmrc`).
+
+## Deployment (Vercel)
+
+The repository ships with a production-ready `vercel.json`:
+
+```bash
+git push origin main        # publish the project to GitHub
+vercel                      # or import the repository on vercel.com
+```
+
+- Build command `npm run build`, output directory `dist` (framework: Vite).
+- Hashed assets under `/assets/*` are served with a 1-year `immutable`
+  cache; HTML is always revalidated.
+- Security headers (HSTS, `nosniff`, frame/referrer/permissions policies) and
+  an SPA fallback rewrite are configured automatically.
+
 ## Usage
 
 1. **Load sample data** (or add rows manually): each process needs a unique ID,
@@ -100,6 +150,9 @@ npm run lint      # oxlint
 4. **Interact:** hover/focus a Gantt block for details, use the simulator's
    play/step/reset controls to walk through time, and switch algorithms to see
    the schedule change.
+5. **About page:** use the **About** link in the header (or the footer link)
+   to read the project details, how the simulator works, the team and the
+   project guide (`#/about`).
 
 ### Example test case
 
@@ -120,7 +173,7 @@ utilization 100% · throughput 0.2353
 src/
 ├── App.tsx                     # orchestration: validation, run state, layout
 ├── index.css                   # design tokens, dark theme layer, animations
-├── hooks/                      # useProcessList, useTheme
+├── hooks/                      # useProcessList, useTheme, useHashRoute
 ├── lib/                        # shared helpers (clamp, …)
 ├── features/scheduling/
 │   ├── types.ts                # Process, TimelineSegment, metrics contracts
@@ -132,7 +185,8 @@ src/
 │   ├── algorithms/             # fcfs, sjf, srtf, priorityNp, priorityP, roundRobin
 │   └── metrics/                # analyzeTimeline → per-process metrics + summary
 └── components/
-    ├── layout/AppShell.tsx     # header, skip link, theme toggle, footer
+    ├── about/AboutPage.tsx     # project details, how it works, team, guide
+    ├── layout/AppShell.tsx     # header nav, skip link, theme toggle, footer
     ├── processes/ProcessTable.tsx
     ├── simulation/             # SimulationSetup, ResultsPanel, AlgorithmSelector
     ├── results/GanttChart.tsx  # + ganttModel.ts
@@ -206,5 +260,3 @@ are guaranteed.
 ## License
 
 Academic / coursework use.
-#   C P U - S c h e d u l i n g - S i m u l a t o r  
- 
