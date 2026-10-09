@@ -13,7 +13,7 @@ const TEAM_MEMBERS = [
 const PROJECT_DETAILS = [
   { label: 'Subject', value: 'Operating Systems' },
   { label: 'Course', value: 'AIML(AN) — Final Year' },
-  { label: 'Project guide', value: 'Mrs. S Babar' },
+  { label: 'Project guide', value: 'Mrs. S.S. Babar' },
   { label: 'Team', value: '6 members' },
   { label: 'Built with', value: 'React 19 · TypeScript · Vite · Tailwind CSS v4' },
   { label: 'Algorithms', value: '6 scheduling algorithms' },
