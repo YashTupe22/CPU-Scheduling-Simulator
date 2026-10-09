@@ -4,9 +4,6 @@ import { Card, CardHeader } from '../ui/Card'
 const TEAM_MEMBERS = [
   'Yash Tupe',
   'Saheel Khadke',
-  'Atharv Bhosale',
-  'Bhagyashree Phalphale',
-  'Srushti Mane',
   'Sanskar Arude',
 ] as const
 
@@ -14,7 +11,7 @@ const PROJECT_DETAILS = [
   { label: 'Subject', value: 'Operating Systems' },
   { label: 'Course', value: 'AIML(AN) — Final Year' },
   { label: 'Project guide', value: 'Mrs. S.S. Babar' },
-  { label: 'Team', value: '6 members' },
+  { label: 'Team', value: '3 members' },
   { label: 'Built with', value: 'React 19 · TypeScript · Vite · Tailwind CSS v4' },
   { label: 'Algorithms', value: '6 scheduling algorithms' },
 ] as const
