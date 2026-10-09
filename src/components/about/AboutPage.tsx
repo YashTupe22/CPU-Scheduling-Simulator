@@ -177,7 +177,7 @@ export function AboutPage() {
             This project has been developed for the <strong>Operating Systems</strong> subject as
             part of the final-year course of <strong>AIML(AN)</strong>. The concepts, algorithms
             and working demonstrated in this simulator are based on the theory and practicals
-            taught by our faculty. We sincerely thank our project guide, Mrs. S Babar, and the
+            taught by our faculty. We sincerely thank our project guide, Mrs. S.S.Babar, and the
             faculty for their guidance and support throughout the development of this project.
           </p>
         </div>
